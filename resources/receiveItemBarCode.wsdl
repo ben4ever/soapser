@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Flow/Services/Custom" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="Flow/Services/Custom" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Flow/Services/Custom">
+      <s:element name="TestreceiveItemBarCodeService">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestreceiveItemBarCodeServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestreceiveItemBarCodeServiceResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="receiveItemBarCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tXML" type="tns:tXML" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tXML">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:Header" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Header">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Company_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Action_Type" type="tns:Action_Type" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sequence_Number" type="s:integer" />
+          <s:element minOccurs="0" maxOccurs="1" name="Batch_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg_Locale" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg_Time_Zone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Action_Type">
+        <s:restriction base="s:string">
+          <s:enumeration value="create" />
+          <s:enumeration value="update" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemBarCodeList" type="tns:ItemBarCodeList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemBarCodeList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemBarCode" type="tns:ItemBarCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemBarCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IsPrimary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Barcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarcodeType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Extensions" type="tns:Extensions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Extensions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FieldCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldCodeDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="receiveItemBarCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="receiveItemBarCodeResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="responseHeader" type="tns:responseHeader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="responseHeader">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnMessage" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestreceiveItemBarCodeServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestreceiveItemBarCodeService" />
+  </wsdl:message>
+  <wsdl:message name="TestreceiveItemBarCodeServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestreceiveItemBarCodeServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveItemBarCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:receiveItemBarCode" />
+  </wsdl:message>
+  <wsdl:message name="receiveItemBarCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:receiveItemBarCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="receiveItemBarCodeServiceSoap">
+    <wsdl:operation name="TestreceiveItemBarCodeService">
+      <wsdl:input message="tns:TestreceiveItemBarCodeServiceSoapIn" />
+      <wsdl:output message="tns:TestreceiveItemBarCodeServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemBarCode">
+      <wsdl:input message="tns:receiveItemBarCodeSoapIn" />
+      <wsdl:output message="tns:receiveItemBarCodeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="receiveItemBarCodeServiceSoap" type="tns:receiveItemBarCodeServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestreceiveItemBarCodeService">
+      <soap:operation soapAction="Flow/Services/Custom/TestreceiveItemBarCodeService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemBarCode">
+      <soap:operation soapAction="Flow/Services/Custom/receiveItemBarCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="receiveItemBarCodeServiceSoap12" type="tns:receiveItemBarCodeServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestreceiveItemBarCodeService">
+      <soap12:operation soapAction="Flow/Services/Custom/TestreceiveItemBarCodeService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemBarCode">
+      <soap12:operation soapAction="Flow/Services/Custom/receiveItemBarCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="receiveItemBarCodeService">
+    <wsdl:port name="receiveItemBarCodeServiceSoap" binding="tns:receiveItemBarCodeServiceSoap">
+      <soap:address location="https://fstlne-gw1.fastline.local:8081/API/Custom/receiveItembarCode.asmx" />
+    </wsdl:port>
+    <wsdl:port name="receiveItemBarCodeServiceSoap12" binding="tns:receiveItemBarCodeServiceSoap12">
+      <soap12:address location="https://fstlne-gw1.fastline.local:8081/API/Custom/receiveItembarCode.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

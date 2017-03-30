@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Flow/Services/Custom" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="Flow/Services/Custom" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Flow/Services/Custom">
+      <s:element name="TestreceiveItemMasterService">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestreceiveItemMasterServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestreceiveItemMasterServiceResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="receiveItemMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tXML" type="tns:tXML" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="tXML">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:Header" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Header">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message_Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Company_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Action_Type" type="tns:Action_Type" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sequence_Number" type="s:integer" />
+          <s:element minOccurs="0" maxOccurs="1" name="Batch_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference_ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg_Locale" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg_Time_Zone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Action_Type">
+        <s:restriction base="s:string">
+          <s:enumeration value="create" />
+          <s:enumeration value="update" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Item" type="tns:Item" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Item">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsStyle" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivationDate" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TargetExclusive" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnlineExclusive" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EssentialItem" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LongDescription" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShortDescription" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrimaryBarcode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HazmatCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BulkyItem" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemWeight" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemHeight" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemLength" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemWidth" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemVolume" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeightUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DimensionUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VolumeUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPerishable" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemPackageList" type="tns:ItemPackageList" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductHeirarchy" type="tns:ProductHeirarchy" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemBarCodeList" type="tns:ItemBarCodeList" />
+          <s:element minOccurs="0" maxOccurs="1" name="PerishableAttribute" type="tns:PerishableAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarehouseAttributes" type="tns:WarehouseAttributes" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Slotting" type="tns:Slotting" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemPromotion" type="tns:ItemPromotion" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemAttributes" type="tns:ItemAttributes" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Extensions" type="tns:Extensions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemPackageList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemPackage" type="tns:ItemPackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemPackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PackageType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Description" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitWeight" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitWidth" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitLength" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitHeight" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitVolume" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeigthUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DimensionUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VolumeUOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPrimary" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessPartnerNumber" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ti" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hi" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductHeirarchy">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Variant" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Product" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MerchandiseStyle" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Range" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MajorClass" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClassGroup" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Department" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BusinessGroup" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Section" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Company" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemBarCodeList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemBarCode" type="tns:ItemBarCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemBarCode">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsPrimary" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Barcode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BarcodeType" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PerishableAttribute">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ShelfDays" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDateReqd" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinReceivedToExpireDays" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxReceivedToExpireDays" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WarehouseAttributes">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SecureProduct" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Conveyable" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PutawayType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CrushCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VolatilityCode" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Slotting">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LocationCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SlottingRequired" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemPromotion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OnPromo" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PromoStartWeek" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemAttributes">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeTypeId" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeTypeDesc" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeHeaderId" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeHeaderDesc" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeCodeId" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttributeCodeDesc" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Extensions">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FieldCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldCodeDesc" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldValue" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="receiveItemMasterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="receiveItemMasterResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="responseHeader" type="tns:responseHeader" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="responseHeader">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnMessage" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestreceiveItemMasterServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestreceiveItemMasterService" />
+  </wsdl:message>
+  <wsdl:message name="TestreceiveItemMasterServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestreceiveItemMasterServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="receiveItemMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:receiveItemMaster" />
+  </wsdl:message>
+  <wsdl:message name="receiveItemMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:receiveItemMasterResponse" />
+  </wsdl:message>
+  <wsdl:portType name="receiveItemMasterServiceSoap">
+    <wsdl:operation name="TestreceiveItemMasterService">
+      <wsdl:input message="tns:TestreceiveItemMasterServiceSoapIn" />
+      <wsdl:output message="tns:TestreceiveItemMasterServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemMaster">
+      <wsdl:input message="tns:receiveItemMasterSoapIn" />
+      <wsdl:output message="tns:receiveItemMasterSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="receiveItemMasterServiceSoap" type="tns:receiveItemMasterServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestreceiveItemMasterService">
+      <soap:operation soapAction="Flow/Services/Custom/TestreceiveItemMasterService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemMaster">
+      <soap:operation soapAction="Flow/Services/Custom/receiveItemMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="receiveItemMasterServiceSoap12" type="tns:receiveItemMasterServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestreceiveItemMasterService">
+      <soap12:operation soapAction="Flow/Services/Custom/TestreceiveItemMasterService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveItemMaster">
+      <soap12:operation soapAction="Flow/Services/Custom/receiveItemMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="receiveItemMasterService">
+    <wsdl:port name="receiveItemMasterServiceSoap" binding="tns:receiveItemMasterServiceSoap">
+      <soap:address location="https://fstlne-gw1.fastline.local:8081/API/Custom/receiveItemMaster.asmx" />
+    </wsdl:port>
+    <wsdl:port name="receiveItemMasterServiceSoap12" binding="tns:receiveItemMasterServiceSoap12">
+      <soap12:address location="https://fstlne-gw1.fastline.local:8081/API/Custom/receiveItemMaster.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
