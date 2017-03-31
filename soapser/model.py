@@ -13,7 +13,6 @@ class ItemBarCode(ComplexModel):
     __namespace__ = 'Message'
 
     IsPrimary = String(min_occurs=0)
-    IsPrimary = String(min_occurs=0)
     ItemCode = String(min_occurs=0)
     Barcode = String(min_occurs=0)
     Quantity = String(nullable=True)
