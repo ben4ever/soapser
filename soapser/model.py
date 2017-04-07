@@ -64,9 +64,3 @@ class ResponseHeader(ComplexModel):
     ReturnType = String(nullable=True)
     ReturnCode = String(nullable=True)
     ReturnMessage = String(nullable=True)
-
-
-class ItemBarCodeService(ServiceBase):
-    @rpc(TXml, _returns=(Boolean, ResponseHeader))
-    def receiveItemBarCode(ctx, t_xml):
-        pass
