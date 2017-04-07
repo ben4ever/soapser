@@ -4,58 +4,58 @@ from spyne import rpc, Boolean, ComplexModel, Integer, String, ServiceBase
 class Extensions(ComplexModel):
     __namespace__ = 'Extensions'
 
-    FieldCode = String(min_occurs=0)
-    FieldCodeDesc = String(min_occurs=0)
-    FieldValue = String(min_occurs=0)
+    FieldCode = String
+    FieldCodeDesc = String
+    FieldValue = String
 
 
 class ItemBarCode(ComplexModel):
     __namespace__ = 'Message'
 
-    IsPrimary = String(min_occurs=0)
-    ItemCode = String(min_occurs=0)
-    Barcode = String(min_occurs=0)
+    IsPrimary = String
+    ItemCode = String
+    Barcode = String
     Quantity = String(nullable=True)
-    ActionType = String(min_occurs=0)
-    BarcodeType = String(min_occurs=0)
-    Extensions = Extensions.customize(min_occurs=0, max_occurs='unbounded')
+    ActionType = String
+    BarcodeType = String
+    Extensions = Extensions.customize(max_occurs='unbounded')
 
 
 class ItemBarCodeList(ComplexModel):
     __namespace__ = 'Message'
 
     # TODO. unbounded or inf?
-    perms = ItemBarCode.customize(min_occurs=0, max_occurs='unbounded')
+    perms = ItemBarCode.customize(max_occurs='unbounded')
 
 
 class Message(ComplexModel):
     __namespace__ = 'Message'
 
-    perms = ItemBarCodeList.customize(min_occurs=0)
+    perms = ItemBarCodeList
 
 
 class Header(ComplexModel):
     __namespace__ = 'Header'
 
-    Message_Type = String(min_occurs=0)
-    Company_ID = String(min_occurs=0)
-    Version = String(min_occurs=0)
-    Source = String(min_occurs=0)
-    Destination = String(min_occurs=0)
-    Action_Type = String(min_occurs=0, values=['read', 'write'])
-    Sequence_Number = Integer(min_occurs=0)
-    Batch_ID = String(min_occurs=0)
-    Reference_ID = String(min_occurs=0)
-    Msg_Locale = String(min_occurs=0)
-    Msg_Time_Zone = String(min_occurs=0)
-    Internal_Date_Time_Stamp = String(min_occurs=0, nullable=True)
+    Message_Type = String
+    Company_ID = String
+    Version = String
+    Source = String
+    Destination = String
+    Action_Type = String(values=['read', 'write'])
+    Sequence_Number = Integer
+    Batch_ID = String
+    Reference_ID = String
+    Msg_Locale = String
+    Msg_Time_Zone = String
+    Internal_Date_Time_Stamp = String(nullable=True)
 
 
 class TXml(ComplexModel):
     __namespace__ = 'tXML'
 
-    Header = Header.customize(min_occurs=0)
-    Message = Message.customize(min_occurs=0)
+    Header = Header
+    Message = Message
 
 
 class ResponseHeader(ComplexModel):
@@ -67,6 +67,6 @@ class ResponseHeader(ComplexModel):
 
 
 class ItemBarCodeService(ServiceBase):
-    @rpc(TXml, _returns=(Boolean, ResponseHeader.customize(min_occurs=0)))
+    @rpc(TXml, _returns=(Boolean, ResponseHeader))
     def receiveItemBarCode(ctx, t_xml):
         pass
