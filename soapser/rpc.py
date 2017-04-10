@@ -1,7 +1,12 @@
-from spyne import 
+from spyne import srpc, Boolean, ServiceBase
 import soapser.model as mod
 
+
 class receiveItemBarCodeService(ServiceBase):
-    @srpc(TXml, _returns=(Boolean, ResponseHeader))
+    @srpc(mod.TXml, _returns=ReceiveItemBarCodeOutput)
     def receiveItemBarCode(t_xml):
-        pass
+        return ReceiveItemBarCodeOutput(
+            receiveItemBarCodeResult=True,
+            ResponseHeader(ReturnType='rt1', ReturnCode='rc1',
+                           ReturnMessage='rm1')
+            )

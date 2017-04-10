@@ -1,8 +1,9 @@
-from spyne import rpc, Boolean, ComplexModel, Integer, String, ServiceBase
+from spyne import Boolean, ComplexModel, Integer, String
 
+NAMESPACE = 'Flow/Services/Custom'
 
 class Extensions(ComplexModel):
-    __namespace__ = 'Extensions'
+    __namespace__ = NAMESPACE
 
     FieldCode = String
     FieldCodeDesc = String
@@ -10,32 +11,32 @@ class Extensions(ComplexModel):
 
 
 class ItemBarCode(ComplexModel):
-    __namespace__ = 'Message'
+    __namespace__ = NAMESPACE
 
     IsPrimary = String
     ItemCode = String
     Barcode = String
-    Quantity = String(nullable=True)
+    Quantity = String(min_occurs=1)
     ActionType = String
     BarcodeType = String
     Extensions = Extensions.customize(max_occurs='unbounded')
 
 
 class ItemBarCodeList(ComplexModel):
-    __namespace__ = 'Message'
+    __namespace__ = NAMESPACE
 
     # TODO. unbounded or inf?
     perms = ItemBarCode.customize(max_occurs='unbounded')
 
 
 class Message(ComplexModel):
-    __namespace__ = 'Message'
+    __namespace__ = NAMESPACE
 
     perms = ItemBarCodeList
 
 
 class Header(ComplexModel):
-    __namespace__ = 'Header'
+    __namespace__ = NAMESPACE
 
     Message_Type = String
     Company_ID = String
@@ -48,19 +49,25 @@ class Header(ComplexModel):
     Reference_ID = String
     Msg_Locale = String
     Msg_Time_Zone = String
-    Internal_Date_Time_Stamp = String(nullable=True)
+    Internal_Date_Time_Stamp = String(min_occurs=1)
 
 
 class TXml(ComplexModel):
-    __namespace__ = 'tXML'
+    __namespace__ = NAMESPACE
 
     Header = Header
     Message = Message
 
 
 class ResponseHeader(ComplexModel):
-    __namespace__ = 'responseHeader'
+    __namespace__ = NAMESPACE
 
-    ReturnType = String(nullable=True)
-    ReturnCode = String(nullable=True)
-    ReturnMessage = String(nullable=True)
+    ReturnType = String(min_occurs=1)
+    ReturnCode = String(min_occurs=1)
+    ReturnMessage = String(min_occurs=1)
+
+class ReceiveItemBarCodeOutput(ComplexModel):
+    __namespace__ = NAMESPACE
+
+    receiveItemBarCodeResult = Boolean(min_occurs=1)
+    responseHeader = ResponseHeader
