@@ -5,30 +5,30 @@
       <s:element name="receiveItemBarCode">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="tXML" type="tns:tXML" />
+            <s:element minOccurs="0" name="tXML" type="tns:tXML" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="tXML">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:Header" />
-          <s:element minOccurs="0" maxOccurs="1" name="Message" type="tns:Message" />
+          <s:element minOccurs="0" name="Header" type="tns:Header" />
+          <s:element minOccurs="0" name="Message" type="tns:Message" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Header">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Message_Type" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Company_ID" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Action_Type" type="tns:Action_Type" />
-          <s:element minOccurs="0" maxOccurs="1" name="Sequence_Number" type="s:integer" />
-          <s:element minOccurs="0" maxOccurs="1" name="Batch_ID" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Reference_ID" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Msg_Locale" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Msg_Time_Zone" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
+          <s:element minOccurs="0" name="Message_Type" type="s:string" />
+          <s:element minOccurs="0" name="Company_ID" type="s:string" />
+          <s:element minOccurs="0" name="Version" type="s:string" />
+          <s:element minOccurs="0" name="Source" type="s:string" />
+          <s:element minOccurs="0" name="Destination" type="s:string" />
+          <s:element minOccurs="0" name="Action_Type" type="tns:Action_Type" />
+          <s:element minOccurs="0" name="Sequence_Number" type="s:integer" />
+          <s:element minOccurs="0" name="Batch_ID" type="s:string" />
+          <s:element minOccurs="0" name="Reference_ID" type="s:string" />
+          <s:element minOccurs="0" name="Msg_Locale" type="s:string" />
+          <s:element minOccurs="0" name="Msg_Time_Zone" type="s:string" />
+          <s:element minOccurs="1" name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="Action_Type">
@@ -39,7 +39,7 @@
       </s:simpleType>
       <s:complexType name="Message">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="ItemBarCodeList" type="tns:ItemBarCodeList" />
+          <s:element minOccurs="0" name="ItemBarCodeList" type="tns:ItemBarCodeList" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ItemBarCodeList">
@@ -49,35 +49,35 @@
       </s:complexType>
       <s:complexType name="ItemBarCode">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="IsPrimary" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="Barcode" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Quantity" nillable="true" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="ActionType" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="BarcodeType" type="s:string" />
+          <s:element minOccurs="0" name="IsPrimary" type="s:string" />
+          <s:element minOccurs="0" name="ItemCode" type="s:string" />
+          <s:element minOccurs="0" name="Barcode" type="s:string" />
+          <s:element minOccurs="1" name="Quantity" nillable="true" type="s:string" />
+          <s:element minOccurs="0" name="ActionType" type="s:string" />
+          <s:element minOccurs="0" name="BarcodeType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="unbounded" name="Extensions" type="tns:Extensions" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Extensions">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="FieldCode" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="FieldCodeDesc" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="FieldValue" type="s:string" />
+          <s:element minOccurs="0" name="FieldCode" type="s:string" />
+          <s:element minOccurs="0" name="FieldCodeDesc" type="s:string" />
+          <s:element minOccurs="0" name="FieldValue" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="receiveItemBarCodeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="receiveItemBarCodeResult" type="s:boolean" />
-            <s:element minOccurs="0" maxOccurs="1" name="responseHeader" type="tns:responseHeader" />
+            <s:element minOccurs="1" name="receiveItemBarCodeResult" type="s:boolean" />
+            <s:element minOccurs="0" name="responseHeader" type="tns:responseHeader" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="responseHeader">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="ReturnType" nillable="true" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="ReturnCode" nillable="true" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="ReturnMessage" nillable="true" type="s:string" />
+          <s:element minOccurs="1" name="ReturnType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" name="ReturnCode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" name="ReturnMessage" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
