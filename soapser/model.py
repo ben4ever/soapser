@@ -1,6 +1,7 @@
 from spyne import Boolean, ComplexModel, Integer, String
 
-NAMESPACE = 'Flow/Services/Custom'
+from soapser import NAMESPACE
+
 
 class Extensions(ComplexModel):
     __namespace__ = NAMESPACE
@@ -65,6 +66,7 @@ class ResponseHeader(ComplexModel):
     ReturnType = String(min_occurs=1)
     ReturnCode = String(min_occurs=1)
     ReturnMessage = String(min_occurs=1)
+
 
 class ReceiveItemBarCodeOutput(ComplexModel):
     __namespace__ = NAMESPACE
