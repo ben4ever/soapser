@@ -2,62 +2,69 @@ from spyne import Boolean, ComplexModel, Integer, String
 
 from soapser import NAMESPACE
 
+MY_STRING = String(nillable=False)
+
 
 class Extensions(ComplexModel):
     __namespace__ = NAMESPACE
 
-    FieldCode = String
-    FieldCodeDesc = String
-    FieldValue = String
+    FieldCode = MY_STRING
+    FieldCodeDesc = MY_STRING
+    FieldValue = MY_STRING
 
 
 class ItemBarCode(ComplexModel):
     __namespace__ = NAMESPACE
 
-    IsPrimary = String
-    ItemCode = String
-    Barcode = String
+    IsPrimary = MY_STRING
+    ItemCode = MY_STRING
+    Barcode = MY_STRING
     Quantity = String(min_occurs=1)
-    ActionType = String
-    BarcodeType = String
-    Extensions = Extensions.customize(max_occurs='unbounded')
+    ActionType = MY_STRING
+    BarcodeType = MY_STRING
+    Extensions = Extensions.customize(max_occurs='unbounded', nillable=False)
 
 
 class ItemBarCodeList(ComplexModel):
     __namespace__ = NAMESPACE
 
-    # TODO. unbounded or inf?
-    perms = ItemBarCode.customize(max_occurs='unbounded')
+    ItemBarCode = ItemBarCode.customize(max_occurs='unbounded', nillable=False)
 
 
 class Message(ComplexModel):
     __namespace__ = NAMESPACE
 
-    perms = ItemBarCodeList
+    ItemBarCodeList = ItemBarCodeList.customize(nillable=False)
 
 
 class Header(ComplexModel):
     __namespace__ = NAMESPACE
 
-    Message_Type = String
-    Company_ID = String
-    Version = String
-    Source = String
-    Destination = String
-    Action_Type = String(values=['read', 'write'])
-    Sequence_Number = Integer
-    Batch_ID = String
-    Reference_ID = String
-    Msg_Locale = String
-    Msg_Time_Zone = String
+    Message_Type = MY_STRING
+    Company_ID = MY_STRING
+    Version = MY_STRING
+    Source = MY_STRING
+    Destination = MY_STRING
+    Action_Type = MY_STRING(values=['read', 'write'])
+    Sequence_Number = Integer(nillable=False)
+    Batch_ID = MY_STRING
+    Reference_ID = MY_STRING
+    Msg_Locale = MY_STRING
+    Msg_Time_Zone = MY_STRING
     Internal_Date_Time_Stamp = String(min_occurs=1)
 
 
 class TXml(ComplexModel):
     __namespace__ = NAMESPACE
 
-    Header = Header
-    Message = Message
+    Header = Header.customize(nillable=False)
+    Message = Message.customize(nillable=False)
+
+
+class ReceiveItemBarCode(ComplexModel):
+    __namespace__ = NAMESPACE
+
+    tXml = TXml.customize(nillable=False)
 
 
 class ResponseHeader(ComplexModel):
@@ -71,5 +78,5 @@ class ResponseHeader(ComplexModel):
 class ReceiveItemBarCodeOutput(ComplexModel):
     __namespace__ = NAMESPACE
 
-    receiveItemBarCodeResult = Boolean(min_occurs=1)
-    responseHeader = ResponseHeader
+    receiveItemBarCodeResult = Boolean(min_occurs=1, nillable=False)
+    responseHeader = ResponseHeader.customize(nillable=False)

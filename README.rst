@@ -14,7 +14,3 @@ Design
 Testing
 =======
 * Use ``examples/testing/helloworld_null.py``.
-
-TODO
-====
-* WSDL should have ``soapAction="Flow/Services/Custom/receiveItemBarCode"``

@@ -3,9 +3,10 @@ import soapser.model as mod
 
 
 class receiveItemBarCodeService(ServiceBase):
-    @srpc(mod.TXml.customize(nillable=False),
-          _returns=mod.ReceiveItemBarCodeOutput)
-    def receiveItemBarCode(tXml):
+    @srpc(mod.ReceiveItemBarCode, _returns=mod.ReceiveItemBarCodeOutput,
+          _body_style='bare',
+          _operation_name='Flow_Services_Custom_receiveItemBarCode')
+    def receiveItemBarCode(receiveItemBarCode):
         return mod.ReceiveItemBarCodeOutput(
             receiveItemBarCodeResult=True,
             responseHeader=mod.ResponseHeader(
