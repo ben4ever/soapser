@@ -14,3 +14,11 @@ Design
 Testing
 =======
 * Use ``examples/testing/helloworld_null.py``.
+
+TODO
+====
+* Implement custom validation with `native validation`_ since `soft` or `lxml`
+  validation doesn't work with testing according to `Github issue`_.
+
+.. _Github issue: https://github.com/arskom/spyne/issues/318
+.. _native validation: http://spyne.io/docs/2.10/manual/05-02_validation.html#a-native-validation-example
