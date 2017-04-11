@@ -57,8 +57,8 @@ class Header(ComplexModel):
 class TXml(ComplexModel):
     __namespace__ = NAMESPACE
 
-    Header = Header.customize(nillable=False)
-    Message = Message.customize(nillable=False)
+    Header = Header.customize(min_occurs=1, nillable=False)
+    Message = Message.customize(min_occurs=1, nillable=False)
 
 
 class ReceiveItemBarCode(ComplexModel):
