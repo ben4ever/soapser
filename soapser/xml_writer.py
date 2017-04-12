@@ -10,7 +10,7 @@ def _write_message(root, message):
     for ibc in message.ItemBarCodeList:
         el_ibc = etree.SubElement(el_ibc_list, 'ItemBarCode')
         for ibc_tag, ibc_content in ibc.as_dict().items():
-            if isinstance(ibc_content, list):
+            if ibc_tag == 'Extensions':
                 for ext in ibc_content:
                     el_ext = etree.SubElement(el_ibc, 'Extensions')
                     for ext_tag, ext_content in ext.as_dict().items():
