@@ -8,9 +8,9 @@ MY_STRING = String(nillable=False)
 class Extensions(ComplexModel):
     __namespace__ = NAMESPACE
 
-    FieldCode = MY_STRING
+    FieldCode = MY_STRING(min_occurs=1)
     FieldCodeDesc = MY_STRING
-    FieldValue = MY_STRING
+    FieldValue = MY_STRING(min_occurs=1)
 
 
 class ItemBarCode(ComplexModel):
@@ -19,7 +19,7 @@ class ItemBarCode(ComplexModel):
     IsPrimary = MY_STRING
     ItemCode = MY_STRING
     Barcode = MY_STRING
-    Quantity = String(min_occurs=1)
+    Quantity = MY_STRING(min_occurs=1)
     ActionType = MY_STRING
     BarcodeType = MY_STRING
     Extensions = Extensions.customize(max_occurs='unbounded', nillable=False)
@@ -34,7 +34,7 @@ class ItemBarCodeList(ComplexModel):
 class Message(ComplexModel):
     __namespace__ = NAMESPACE
 
-    ItemBarCodeList = ItemBarCodeList.customize(nillable=False)
+    ItemBarCodeList = ItemBarCodeList.customize(min_occurs=1, nillable=False)
 
 
 class Header(ComplexModel):
@@ -51,7 +51,7 @@ class Header(ComplexModel):
     Reference_ID = MY_STRING
     Msg_Locale = MY_STRING
     Msg_Time_Zone = MY_STRING
-    Internal_Date_Time_Stamp = String(min_occurs=1)
+    Internal_Date_Time_Stamp = MY_STRING(min_occurs=1)
 
 
 class TXml(ComplexModel):
@@ -64,15 +64,15 @@ class TXml(ComplexModel):
 class ReceiveItemBarCode(ComplexModel):
     __namespace__ = NAMESPACE
 
-    tXml = TXml.customize(nillable=False)
+    tXml = TXml.customize(min_occurs=1, nillable=False)
 
 
 class ResponseHeader(ComplexModel):
     __namespace__ = NAMESPACE
 
-    ReturnType = String(min_occurs=1)
-    ReturnCode = String(min_occurs=1)
-    ReturnMessage = String(min_occurs=1)
+    ReturnType = MY_STRING(min_occurs=1)
+    ReturnCode = MY_STRING(min_occurs=1)
+    ReturnMessage = MY_STRING(min_occurs=1)
 
 
 class ReceiveItemBarCodeOutput(ComplexModel):
