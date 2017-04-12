@@ -25,9 +25,9 @@ def _write_header(root, header):
 
 def write_xml(receiveItemBarCode):
     root = etree.Element('ReceiveItemBarCode')
-    for t_xml in receiveItemBarCode.tXml:
-        el_t_xml = etree.SubElement(root, 'tXml')
-        _write_header(el_t_xml, t_xml.Header[0])
-        _write_message(el_t_xml, t_xml.Message[0])
+    el_t_xml = etree.SubElement(root, 'tXml')
+    t_xml = receiveItemBarCode.tXml[0]
+    _write_header(el_t_xml, t_xml.Header[0])
+    _write_message(el_t_xml, t_xml.Message[0])
     etree.ElementTree(root).write(OUTPUT_FILE, encoding='UTF-8',
                                   pretty_print=True, xml_declaration=True)
