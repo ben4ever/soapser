@@ -72,7 +72,7 @@ def test_receiveItemBarCode():
         ]
     server = NullServer(
         Application([rpc.receiveItemBarCodeService], 'some_tns'))
-    server.service.Flow_Services_Custom_receiveItemBarCode(obj)
+    server.service.receiveItemBarCode(obj)
 
 def test_xml_checker():
     from io import BytesIO

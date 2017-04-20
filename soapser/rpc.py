@@ -6,8 +6,7 @@ import soapser.model as mod
 
 class receiveItemBarCodeService(ServiceBase):
     @srpc(mod.ReceiveItemBarCode, _returns=mod.ReceiveItemBarCodeOutput,
-          _body_style='bare',
-          _operation_name='Flow_Services_Custom_receiveItemBarCode')
+          _body_style='bare')
     def receiveItemBarCode(receiveItemBarCode):
         xml_writer.write_xml(receiveItemBarCode)
         return mod.ReceiveItemBarCodeOutput(
