@@ -3,9 +3,10 @@ from spyne import Boolean, ComplexModel, Integer, String
 from soapser import NAMESPACE
 
 MY_STRING = String(nillable=False)
+ComplexModelOrdered = ComplexModel.customize(declare_order='declared')
 
 
-class Extensions(ComplexModel):
+class Extensions(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     FieldCode = MY_STRING(min_occurs=1)
@@ -13,7 +14,7 @@ class Extensions(ComplexModel):
     FieldValue = MY_STRING(min_occurs=1)
 
 
-class ItemBarCode(ComplexModel):
+class ItemBarCode(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     IsPrimary = MY_STRING
@@ -25,19 +26,19 @@ class ItemBarCode(ComplexModel):
     Extensions = Extensions.customize(max_occurs='unbounded', nillable=False)
 
 
-class ItemBarCodeList(ComplexModel):
+class ItemBarCodeList(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     ItemBarCode = ItemBarCode.customize(max_occurs='unbounded', nillable=False)
 
 
-class Message(ComplexModel):
+class Message(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     ItemBarCodeList = ItemBarCodeList.customize(min_occurs=1, nillable=False)
 
 
-class Header(ComplexModel):
+class Header(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     Message_Type = MY_STRING
@@ -54,20 +55,20 @@ class Header(ComplexModel):
     Internal_Date_Time_Stamp = MY_STRING(min_occurs=1)
 
 
-class TXml(ComplexModel):
+class TXml(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     Header = Header.customize(min_occurs=1, nillable=False)
     Message = Message.customize(min_occurs=1, nillable=False)
 
 
-class ReceiveItemBarCode(ComplexModel):
+class ReceiveItemBarCode(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     tXml = TXml.customize(min_occurs=1, nillable=False)
 
 
-class ResponseHeader(ComplexModel):
+class ResponseHeader(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     ReturnType = MY_STRING(min_occurs=1)
@@ -75,7 +76,7 @@ class ResponseHeader(ComplexModel):
     ReturnMessage = MY_STRING(min_occurs=1)
 
 
-class ReceiveItemBarCodeOutput(ComplexModel):
+class ReceiveItemBarCodeOutput(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     receiveItemBarCodeResult = Boolean(min_occurs=1, nillable=False)
