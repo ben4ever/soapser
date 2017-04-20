@@ -29,9 +29,9 @@ def _write_header(root, header):
 def write_xml(receiveItemBarCode):
     root = etree.Element('ReceiveItemBarCode')
     el_t_xml = etree.SubElement(root, 'tXml')
-    t_xml = receiveItemBarCode.tXml[0]
-    _write_header(el_t_xml, t_xml.Header[0])
-    _write_message(el_t_xml, t_xml.Message[0])
+    t_xml = receiveItemBarCode.tXml
+    _write_header(el_t_xml, t_xml.Header)
+    _write_message(el_t_xml, t_xml.Message)
     filename = '{}.txt'.format(datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     full_path = str(PurePath(OUTPUT_DIR, 'receive_item_bar_code', filename))
     etree.ElementTree(root).write(full_path, encoding='UTF-8',
