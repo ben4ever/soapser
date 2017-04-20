@@ -89,15 +89,18 @@ def test_xml_checker():
             return [10] * foo
 
     req = b"""
-    <soap11env:Envelope  xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/"
-                    xmlns:tns="tns">
-        <soap11env:Body>
-            <tns:some_call>2</tns:some_call>
-        </soap11env:Body>
+    <soap11env:Envelope
+        xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:tns="tns">
+      <soap11env:Body>
+        <tns:some_call>2</tns:some_call>
+      </soap11env:Body>
     </soap11env:Envelope>
     """
 
-    app = Application([SomeService], 'tns', in_protocol=Soap11(validator='lxml'), out_protocol=Soap11(validator='lxml'))
+    app = Application([SomeService], 'tns',
+                      in_protocol=Soap11(validator='lxml'),
+                      out_protocol=Soap11(validator='lxml'))
     server = WsgiApplication(app)
     response = etree.fromstring(b''.join(server({
         'QUERY_STRING': '',
@@ -108,7 +111,6 @@ def test_xml_checker():
     }, lambda a, b: None, "http://null")))
 
     response_str = etree.tostring(response, pretty_print=True)
-    print(response_str)
 
     expected = b"""
         <soap11env:Envelope xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="tns">
