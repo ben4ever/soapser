@@ -3,14 +3,11 @@ TODO
 Required
 --------
 * Implement ``receiveItemMaster``.
-* Using ``_body_style='bare'`` seems to return ``None`` on client side (at least
-  within tests). Investigate whether I can maybe use ``_body_style='wrapped'``
-  and manually re-organize the XML element scaffolding to receive the same
-  result as with ``bare``.
-* Use a config file to configurate output directory.
 
 Optional
 --------
+* Move common code in tests into fixtures
+* Use a config file to configurate output directory.
 * Implement custom validation with `native validation`_ since ``soft`` or ``lxml``
   validation doesn't work with testing according to `Github issue`_. But before,
   check if `this <https://github.com/plq/neurons>`__ project tests in a maybe
