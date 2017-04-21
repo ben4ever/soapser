@@ -8,7 +8,7 @@ class receiveItemBarCodeService(ServiceBase):
     @srpc(mod.ReceiveItemBarCode, _returns=mod.ReceiveItemBarCodeOutput,
           _body_style='bare')
     def receiveItemBarCode(content):
-        xml_writer.write_xml(content)
+        xml_writer.write_receiveItemBarCode(content)
         return mod.ReceiveItemBarCodeOutput(
             receiveItemBarCodeResult=True,
             responseHeader=mod.ResponseHeader(
@@ -20,7 +20,7 @@ class receiveItemMasterService(ServiceBase):
     @srpc(mod.ReceiveItemMaster, _returns=mod.ReceiveItemMasterOutput,
           _body_style='bare')
     def receiveItemMaster(content):
-        xml_writer.write_xml(content)
+        xml_writer.write_receiveItemMaster(content)
         return mod.ReceiveItemMasterOutput(
             receiveItemMasterResult=True,
             responseHeader=mod.ResponseHeader(
