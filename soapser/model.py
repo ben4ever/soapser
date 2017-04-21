@@ -3,7 +3,8 @@ from spyne import Boolean, ComplexModel, Integer, String
 from soapser import NAMESPACE
 
 MY_STRING = String(nillable=False)
-ComplexModelOrdered = ComplexModel.customize(declare_order='declared')
+ComplexModelOrdered = ComplexModel.customize(declare_order='declared',
+                                             nillable=False)
 
 
 class Extensions(ComplexModelOrdered):
@@ -23,19 +24,19 @@ class ItemBarCode(ComplexModelOrdered):
     Quantity = MY_STRING(min_occurs=1)
     ActionType = MY_STRING
     BarcodeType = MY_STRING
-    Extensions = Extensions.customize(max_occurs='unbounded', nillable=False)
+    Extensions = Extensions.customize(max_occurs='unbounded')
 
 
 class ItemBarCodeList(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
-    ItemBarCode = ItemBarCode.customize(max_occurs='unbounded', nillable=False)
+    ItemBarCode = ItemBarCode.customize(max_occurs='unbounded')
 
 
 class Message(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
-    ItemBarCodeList = ItemBarCodeList.customize(min_occurs=1, nillable=False)
+    ItemBarCodeList = ItemBarCodeList.customize(min_occurs=1)
 
 
 class Header(ComplexModelOrdered):
@@ -58,14 +59,14 @@ class Header(ComplexModelOrdered):
 class TXml(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
-    Header = Header.customize(min_occurs=1, nillable=False)
-    Message = Message.customize(min_occurs=1, nillable=False)
+    Header = Header.customize(min_occurs=1)
+    Message = Message.customize(min_occurs=1)
 
 
 class ReceiveItemBarCode(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
-    tXml = TXml.customize(min_occurs=1, nillable=False)
+    tXml = TXml.customize(min_occurs=1)
 
 
 class ResponseHeader(ComplexModelOrdered):
@@ -80,4 +81,4 @@ class ReceiveItemBarCodeOutput(ComplexModelOrdered):
     __namespace__ = NAMESPACE
 
     receiveItemBarCodeResult = Boolean(min_occurs=1, nillable=False)
-    responseHeader = ResponseHeader.customize(nillable=False)
+    responseHeader = ResponseHeader
