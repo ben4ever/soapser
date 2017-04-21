@@ -2,6 +2,7 @@ from datetime import datetime
 from pathlib import PurePath
 
 from lxml import etree
+from spyne import ComplexModel
 
 from soapser import OUTPUT_DIR
 import soapser.model as mod
@@ -20,17 +21,34 @@ def _process_item_bar_code_list(el, message):
             else:
                 etree.SubElement(el_ibc, ibc_tag).text = ibc_content
 
-def _process_item(el, message):
-    for item in message.Item:
-        el_item = etree.SubElement(el, 'Item')
-        for item_tag, item_content in item.as_dict().items():
-            if isinstance(item_content, str):
-                etree.SubElement(el_item, item_tag).text = item_content
+def _process_item(el, msg):
+    for name, cont in msg.as_dict().items():
+        if isinstance(cont, str):
+            etree.SubElement(el, name).text = cont
+        elif isinstance(cont, list):
+            if name.endswith('List'):
+                if name == 'ItemBarCodeList':
+                    child_name = 'ItemBarCode'
+                elif name == 'ItemPackageList':
+                    child_name = 'ItemPackage'
+                else:
+                    assert False, 'Unknown element name'
+                sub_el = etree.SubElement(el, name)
+                for sub_cont in cont:
+                    sub2_el = etree.SubElement(sub_el, child_name)
+                    _process_item(sub2_el, sub_cont)
+            else:
+                for sub_cont in cont:
+                    sub_el = etree.SubElement(el, name)
+                    _process_item(sub_el, sub_cont)
+        elif isinstance(cont, ComplexModel):
+            sub_el = etree.SubElement(el, name)
+            _process_item(sub_el, cont)
 
 def _write_message(root, message):
     el_msg = etree.SubElement(root, 'Message')
     if hasattr(message, 'ItemBarCodeList') and message.ItemBarCodeList:
-        _process_item_bar_code_list(el_msg, message)
+        _process_item(el_msg, message)
     elif hasattr(message, 'Item') and message.Item:
         _process_item(el_msg, message)
 
