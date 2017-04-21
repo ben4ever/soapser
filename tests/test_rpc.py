@@ -66,7 +66,10 @@ def test_receiveItemBarCode():
         )
     server = NullServer(
         Application([rpc.receiveItemBarCodeService], 'some_tns'))
+    # Using ``_body_style='bare'`` seems to cause to always return
+    # ``None``. Hence we can't check the response object.
     server.service.receiveItemBarCode(obj)
+
 
 def test_receiveItemBarCode_soap():
     from io import BytesIO
