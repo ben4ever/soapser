@@ -28,7 +28,7 @@
           <s:element minOccurs="0" name="Reference_ID" type="s:string" />
           <s:element minOccurs="0" name="Msg_Locale" type="s:string" />
           <s:element minOccurs="0" name="Msg_Time_Zone" type="s:string" />
-          <s:element minOccurs="1" name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
+          <s:element name="Internal_Date_Time_Stamp" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="Action_Type">
@@ -52,7 +52,7 @@
           <s:element minOccurs="0" name="IsPrimary" type="s:string" />
           <s:element minOccurs="0" name="ItemCode" type="s:string" />
           <s:element minOccurs="0" name="Barcode" type="s:string" />
-          <s:element minOccurs="1" name="Quantity" nillable="true" type="s:string" />
+          <s:element name="Quantity" nillable="true" type="s:string" />
           <s:element minOccurs="0" name="ActionType" type="s:string" />
           <s:element minOccurs="0" name="BarcodeType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="unbounded" name="Extensions" type="tns:Extensions" />
@@ -68,16 +68,16 @@
       <s:element name="receiveItemBarCodeResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" name="receiveItemBarCodeResult" type="s:boolean" />
+            <s:element name="receiveItemBarCodeResult" type="s:boolean" />
             <s:element minOccurs="0" name="responseHeader" type="tns:responseHeader" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:complexType name="responseHeader">
         <s:sequence>
-          <s:element minOccurs="1" name="ReturnType" nillable="true" type="s:string" />
-          <s:element minOccurs="1" name="ReturnCode" nillable="true" type="s:string" />
-          <s:element minOccurs="1" name="ReturnMessage" nillable="true" type="s:string" />
+          <s:element name="ReturnType" nillable="true" type="s:string" />
+          <s:element name="ReturnCode" nillable="true" type="s:string" />
+          <s:element name="ReturnMessage" nillable="true" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
