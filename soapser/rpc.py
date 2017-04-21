@@ -14,3 +14,15 @@ class receiveItemBarCodeService(ServiceBase):
             responseHeader=mod.ResponseHeader(
                 ReturnType='rt1', ReturnCode='rc1', ReturnMessage='rm1')
             )
+
+
+class receiveItemMasterService(ServiceBase):
+    @srpc(mod.ReceiveItemMaster, _returns=mod.ReceiveItemMasterOutput,
+          _body_style='bare')
+    def receiveItemMaster(content):
+        xml_writer.write_xml(content)
+        return mod.ReceiveItemMasterOutput(
+            receiveItemMasterResult=True,
+            responseHeader=mod.ResponseHeader(
+                ReturnType='rt1', ReturnCode='rc1', ReturnMessage='rm1')
+            )
