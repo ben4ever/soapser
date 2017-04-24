@@ -8,20 +8,7 @@ from soapser import OUTPUT_DIR
 import soapser.model as mod
 
 
-def _process_item_bar_code_list(el, message):
-    el_ibc_list = etree.SubElement(el, 'ItemBarCodeList')
-    for ibc in message.ItemBarCodeList:
-        el_ibc = etree.SubElement(el_ibc_list, 'ItemBarCode')
-        for ibc_tag, ibc_content in ibc.as_dict().items():
-            if ibc_tag == 'Extensions':
-                for ext in ibc_content:
-                    el_ext = etree.SubElement(el_ibc, 'Extensions')
-                    for ext_tag, ext_content in ext.as_dict().items():
-                        etree.SubElement(el_ext, ext_tag).text = ext_content
-            else:
-                etree.SubElement(el_ibc, ibc_tag).text = ibc_content
-
-def _process_item(el, msg):
+def _process_message_content(el, msg):
     for name, cont in msg.as_dict().items():
         if isinstance(cont, str):
             etree.SubElement(el, name).text = cont
@@ -36,21 +23,18 @@ def _process_item(el, msg):
                 sub_el = etree.SubElement(el, name)
                 for sub_cont in cont:
                     sub2_el = etree.SubElement(sub_el, child_name)
-                    _process_item(sub2_el, sub_cont)
+                    _process_message_content(sub2_el, sub_cont)
             else:
                 for sub_cont in cont:
                     sub_el = etree.SubElement(el, name)
-                    _process_item(sub_el, sub_cont)
+                    _process_message_content(sub_el, sub_cont)
         elif isinstance(cont, ComplexModel):
             sub_el = etree.SubElement(el, name)
-            _process_item(sub_el, cont)
+            _process_message_content(sub_el, cont)
 
 def _write_message(root, message):
     el_msg = etree.SubElement(root, 'Message')
-    if hasattr(message, 'ItemBarCodeList') and message.ItemBarCodeList:
-        _process_item(el_msg, message)
-    elif hasattr(message, 'Item') and message.Item:
-        _process_item(el_msg, message)
+    _process_message_content(el_msg, message)
 
 def _write_header(root, header):
     el_header = etree.SubElement(root, 'Header')
