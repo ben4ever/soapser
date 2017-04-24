@@ -39,7 +39,7 @@ def _write_message(root, message):
 def _write_header(root, header):
     el_header = etree.SubElement(root, 'Header')
     for k, v in header.as_dict().items():
-        etree.SubElement(el_header, k).text = v
+        etree.SubElement(el_header, k).text = str(v)
 
 def _write_common(content, element_name, folder_name):
     root = etree.Element(element_name)
