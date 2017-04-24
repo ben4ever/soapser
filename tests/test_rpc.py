@@ -237,13 +237,13 @@ def test_receiveItemBarCode_soap():
     from spyne.protocol.soap import Soap11
     from spyne.server.wsgi import WsgiApplication
 
+    from soapser import NAMESPACE
+
     req = b"""
     <soap11env:Envelope
-        xmlns:s0="Flow/Services/Custom"
-        xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:tns="tns">
+        xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/">
       <soap11env:Body>
-        <tns:receiveItemBarCode>
+        <s0:receiveItemBarCode xmlns:s0="Flow/Services/Custom">
           <s0:tXml>
             <s0:Header>
               <s0:Message_Type>mt</s0:Message_Type>
@@ -282,12 +282,12 @@ def test_receiveItemBarCode_soap():
               </s0:ItemBarCodeList>
             </s0:Message>
           </s0:tXml>
-        </tns:receiveItemBarCode>
+        </s0:receiveItemBarCode>
       </soap11env:Body>
     </soap11env:Envelope>
     """
 
-    app = Application([rpc.receiveItemBarCodeService], 'tns',
+    app = Application([rpc.receiveItemBarCodeService], NAMESPACE,
                       in_protocol=Soap11(validator='lxml'),
                       out_protocol=Soap11(validator='lxml'))
     server = WsgiApplication(app)
@@ -301,18 +301,16 @@ def test_receiveItemBarCode_soap():
 
     expected = b"""
         <soap11env:Envelope
-            xmlns:s0="Flow/Services/Custom"
-            xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/"
-            xmlns:tns="tns">
+            xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/">
           <soap11env:Body>
-            <tns:receiveItemBarCodeResponse>
+            <s0:receiveItemBarCodeResponse xmlns:s0="Flow/Services/Custom">
               <s0:receiveItemBarCodeResult>true</s0:receiveItemBarCodeResult>
               <s0:responseHeader>
                 <s0:ReturnType>rt1</s0:ReturnType>
                 <s0:ReturnCode>rc1</s0:ReturnCode>
                 <s0:ReturnMessage>rm1</s0:ReturnMessage>
               </s0:responseHeader>
-            </tns:receiveItemBarCodeResponse>
+            </s0:receiveItemBarCodeResponse>
           </soap11env:Body>
         </soap11env:Envelope>"""
     if not LXMLOutputChecker().check_output(expected, response, PARSE_XML):
