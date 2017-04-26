@@ -11,8 +11,8 @@ def test_receiveItemBarCode():
             Version='v',
             Source='s',
             Destination='d',
-            Action_Type='at',
-            Sequence_Number='sn',
+            Action_Type='read',
+            Sequence_Number=1,
             Batch_ID='bi',
             Reference_ID='ri',
             Msg_Locale='ml',
@@ -79,8 +79,8 @@ def test_receiveItemMaster():
             Version='v',
             Source='s',
             Destination='d',
-            Action_Type='at',
-            Sequence_Number='sn',
+            Action_Type='read',
+            Sequence_Number=1,
             Batch_ID='bi',
             Reference_ID='ri',
             Msg_Locale='ml',
@@ -261,6 +261,24 @@ def test_receiveItemBarCode_soap():
             </s0:Header>
             <s0:Message>
               <s0:ItemBarCodeList>
+                <s0:ItemBarCode>
+                  <s0:IsPrimary>ip</s0:IsPrimary>
+                  <s0:ItemCode>ic</s0:ItemCode>
+                  <s0:Barcode>b</s0:Barcode>
+                  <s0:Quantity>q</s0:Quantity>
+                  <s0:ActionType>at</s0:ActionType>
+                  <s0:BarcodeType>bt</s0:BarcodeType>
+                  <s0:Extensions>
+                    <s0:FieldCode>fc</s0:FieldCode>
+                    <s0:FieldCodeDesc>fcd</s0:FieldCodeDesc>
+                    <s0:FieldValue>fv</s0:FieldValue>
+                  </s0:Extensions>
+                  <s0:Extensions>
+                    <s0:FieldCode>fc</s0:FieldCode>
+                    <s0:FieldCodeDesc>fcd</s0:FieldCodeDesc>
+                    <s0:FieldValue>fv</s0:FieldValue>
+                  </s0:Extensions>
+                </s0:ItemBarCode>
                 <s0:ItemBarCode>
                   <s0:IsPrimary>ip</s0:IsPrimary>
                   <s0:ItemCode>ic</s0:ItemCode>
