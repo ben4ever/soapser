@@ -3,42 +3,213 @@ from zeep import Client
 
 c = Client('http://localhost:8000?wsdl')
 
-header = c.get_type('ns0:Header')(
-            Message_Type='mt',
-            Company_ID='ci',
-            Version='v',
-            Source='s',
-            Destination='d',
-            Action_Type='read',
-            Sequence_Number='1',
-            Batch_ID='bi',
-            Reference_ID='ri',
-            Msg_Locale='ml',
-            Msg_Time_Zone='mtz',
-            Internal_Date_Time_Stamp='idts')
+def get_header():
+    return c.get_type('ns0:Header')(
+        Message_Type='mt',
+        Company_ID='ci',
+        Version='v',
+        Source='s',
+        Destination='d',
+        Action_Type='read',
+        Sequence_Number='1',
+        Batch_ID='bi',
+        Reference_ID='ri',
+        Msg_Locale='ml',
+        Msg_Time_Zone='mtz',
+        Internal_Date_Time_Stamp='idts'
+        )
 
-extensions = c.get_type('ns0:Extensions')(
-    FieldCode='fc',
-    FieldCodeDesc='fcd',
-    FieldValue='fv')
+def send_receive_item_bar_code():
+    message = c.get_type('ns0:Message')(
+        ItemBarCodeList=c.get_type('ns0:ItemBarCodeList')(
+            ItemBarCode=[
+                c.get_type('ns0:ItemBarCode')(
+                    IsPrimary='ip',
+                    ItemCode='ic',
+                    Barcode='b',
+                    Quantity='q',
+                    ActionType='at',
+                    BarcodeType='bt',
+                    Extensions=[
+                        c.get_type('ns0:Extensions')(
+                            FieldCode='fc',
+                            FieldCodeDesc='fcd',
+                            FieldValue='fv'
+                            ),
+                        c.get_type('ns0:Extensions')(
+                            FieldCode='fc',
+                            FieldCodeDesc='fcd',
+                            FieldValue='fv'
+                            ),
+                        ]
+                    ),
+                c.get_type('ns0:ItemBarCode')(
+                    IsPrimary='ip',
+                    ItemCode='ic',
+                    Barcode='b',
+                    Quantity='q',
+                    ActionType='at',
+                    BarcodeType='bt',
+                    Extensions=[
+                        c.get_type('ns0:Extensions')(
+                            FieldCode='fc',
+                            FieldCodeDesc='fcd',
+                            FieldValue='fv'
+                            ),
+                        c.get_type('ns0:Extensions')(
+                            FieldCode='fc',
+                            FieldCodeDesc='fcd',
+                            FieldValue='fv'
+                            ),
+                        ]
+                    ),
+                ]
+            )
+        )
+    tXml = c.get_type('ns0:TXml')(Header=get_header(), Message=message)
 
-item_bar_code = c.get_type('ns0:ItemBarCode')(
-    IsPrimary='ip',
-    ItemCode='ic',
-    Barcode='b',
-    Quantity='q',
-    ActionType='at',
-    BarcodeType='bt')
-item_bar_code.Extensions.append(extensions)
-item_bar_code.Extensions.append(extensions)
+    c.service.receiveItemBarCode(tXml=tXml)
 
-item_bar_code_list = c.get_type('ns0:ItemBarCodeList')()
-item_bar_code_list.ItemBarCode.append(item_bar_code)
-item_bar_code_list.ItemBarCode.append(item_bar_code)
+def send_receive_item_master():
+    message = c.get_type('ns0:Message')(
+        Item=c.get_type('ns0:Item')(
+            ItemCode='ic',
+            IsStyle='is',
+            ActionType='at',
+            ActivationDate='ad',
+            TargetExclusive='te',
+            OnlineExclusive='oe',
+            EssentialItem='ei',
+            LongDescription='ld',
+            ShortDescription='sd',
+            PrimaryBarcode='pb',
+            HazmatCode='hc',
+            BulkyItem='bi',
+            ItemWeight='iw',
+            ItemHeight='ih',
+            ItemLength='il',
+            ItemWidth='iw',
+            ItemVolume='iv',
+            WeightUOM='wu',
+            DimensionUOM='du',
+            VolumeUOM='vu',
+            IsPerishable='ip',
+            ItemPackageList=c.get_type('ns0:ItemPackageList')(
+                ItemPackage=[
+                    c.get_type('ns0:ItemPackage')(
+                        PackageType='pt',
+                        Description='d',
+                        Quantity='q',
+                        UnitWeight='uw',
+                        UnitWidth='uw',
+                        UnitLength='ul',
+                        UnitHeight='uh',
+                        UnitVolume='uv',
+                        WeigthUOM='wu',
+                        DimensionUOM='du',
+                        VolumeUOM='vu',
+                        IsPrimary='ip',
+                        BusinessPartnerNumber='bpn',
+                        Ti='ti',
+                        Hi='hi',
+                        ),
+                    ]
+                ),
+            ProductHeirarchy=c.get_type('ns0:ProductHeirarchy')(
+                Variant='v',
+                Product='p',
+                MerchandiseStyle='ms',
+                Range='r',
+                MajorClass='mc',
+                ClassGroup='cg',
+                Department='d',
+                BusinessGroup='bg',
+                Section='s',
+                Company='c',
+                ),
+            ItemBarCodeList=c.get_type('ns0:ItemBarCodeList')(
+                ItemBarCode=[
+                    c.get_type('ns0:ItemBarCode')(
+                        IsPrimary='ip',
+                        Barcode='b',
+                        Quantity='q',
+                        ActionType='at',
+                        BarcodeType='bt',
+                        ),
+                    c.get_type('ns0:ItemBarCode')(
+                        IsPrimary='ip',
+                        Barcode='b',
+                        Quantity='q',
+                        ActionType='at',
+                        BarcodeType='bt',
+                        ),
+                    ]
+                ),
+            PerishableAttribute=c.get_type('ns0:PerishableAttribute')(
+                ShelfDays='sd',
+                ExpireDateReqd='edr',
+                MinReceivedToExpireDays='mrted',
+                MaxReceivedToExpireDays='mrted',
+                ),
+            WarehouseAttributes=c.get_type('ns0:WarehouseAttributes')(
+                SecureProduct='sp',
+                Conveyable='c',
+                PutawayType='pt',
+                CrushCode='cc',
+                VolatilityCode='vc',
+                ),
+            Slotting=[
+                c.get_type('ns0:Slotting')(
+                    LocationCode='lc',
+                    SlottingRequired='sr',
+                    ),
+                c.get_type('ns0:Slotting')(
+                    LocationCode='lc',
+                    SlottingRequired='sr',
+                    ),
+                ],
+            ItemPromotion=c.get_type('ns0:ItemPromotion')(
+                OnPromo='op',
+                PromoStartWeek='psw',
+                ),
+            ItemAttributes=[
+                c.get_type('ns0:ItemAttributes')(
+                    AttributeTypeId='ati',
+                    AttributeTypeDesc='atd',
+                    AttributeHeaderId='ahi',
+                    AttributeHeaderDesc='ahd',
+                    AttributeCodeId='aci',
+                    AttributeCode='ac',
+                    AttributeCodeDesc='acd',
+                    ),
+                c.get_type('ns0:ItemAttributes')(
+                    AttributeTypeId='ati',
+                    AttributeTypeDesc='atd',
+                    AttributeHeaderId='ahi',
+                    AttributeHeaderDesc='ahd',
+                    AttributeCodeId='aci',
+                    AttributeCode='ac',
+                    AttributeCodeDesc='acd',
+                    ),
+                ],
+            Extensions=[
+                c.get_type('ns0:Extensions')(
+                    FieldCode='fc',
+                    FieldCodeDesc='fcd',
+                    FieldValue='fv'
+                    ),
+                c.get_type('ns0:Extensions')(
+                    FieldCode='fc',
+                    FieldCodeDesc='fcd',
+                    FieldValue='fv'
+                    ),
+                ]
+            )
+        )
 
-message = c.get_type('ns0:Message')(
-    ItemBarCodeList=item_bar_code_list)
+    tXml = c.get_type('ns0:TXml')(Header=get_header(), Message=message)
 
-tXml = c.get_type('ns0:TXml')(Header=header, Message=message)
+    c.service.receiveItemMaster(tXml=tXml)
 
-c.service.receiveItemBarCode(tXml=tXml)
+send_receive_item_bar_code()
+send_receive_item_master()
