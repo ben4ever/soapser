@@ -11,5 +11,5 @@ wsdl.build_interface_document(WSDL_URL)
 b = BytesIO(wsdl.get_interface_document())
 parser = etree.XMLParser(remove_blank_text=True)
 tree = etree.parse(b, parser=parser)
-tree.write('resources/soapser.wsdl', pretty_print=True,
+tree.write('/tmp/soapser.wsdl', pretty_print=True,
            xml_declaration=True)
