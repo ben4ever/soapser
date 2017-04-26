@@ -12,7 +12,10 @@ class receiveItemBarCodeService(ServiceBase):
         return mod.ReceiveItemBarCodeOutput(
             receiveItemBarCodeResult=True,
             responseHeader=mod.ResponseHeader(
-                ReturnType='rt1', ReturnCode='rc1', ReturnMessage='rm1')
+                ReturnType='ItemCrossReference',
+                ReturnCode='Success',
+                ReturnMessage='ItemCrossReference Interface Process Completed '
+                              'Successfully')
             )
 
 
@@ -24,5 +27,8 @@ class receiveItemMasterService(ServiceBase):
         return mod.ReceiveItemMasterOutput(
             receiveItemMasterResult=True,
             responseHeader=mod.ResponseHeader(
-                ReturnType='rt1', ReturnCode='rc1', ReturnMessage='rm1')
+                ReturnType='Item Master',
+                ReturnCode='Success',
+                ReturnMessage='Item Master Interface Process Completed '
+                              'Successfully')
             )

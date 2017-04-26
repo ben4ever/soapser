@@ -324,9 +324,11 @@ def test_receiveItemBarCode_soap():
             <s0:receiveItemBarCodeResponse xmlns:s0="Flow/Services/Custom">
               <s0:receiveItemBarCodeResult>true</s0:receiveItemBarCodeResult>
               <s0:responseHeader>
-                <s0:ReturnType>rt1</s0:ReturnType>
-                <s0:ReturnCode>rc1</s0:ReturnCode>
-                <s0:ReturnMessage>rm1</s0:ReturnMessage>
+                <s0:ReturnType>ItemCrossReference</s0:ReturnType>
+                <s0:ReturnCode>Success</s0:ReturnCode>
+                <s0:ReturnMessage>
+                  ItemCrossReference Interface Process Completed Successfully
+                </s0:ReturnMessage>
               </s0:responseHeader>
             </s0:receiveItemBarCodeResponse>
           </soap11env:Body>
@@ -516,9 +518,11 @@ def test_receiveItemMaster_soap():
             <s0:receiveItemMasterResponse xmlns:s0="Flow/Services/Custom">
               <s0:receiveItemMasterResult>true</s0:receiveItemMasterResult>
               <s0:responseHeader>
-                <s0:ReturnType>rt1</s0:ReturnType>
-                <s0:ReturnCode>rc1</s0:ReturnCode>
-                <s0:ReturnMessage>rm1</s0:ReturnMessage>
+                <s0:ReturnType>Item Master</s0:ReturnType>
+                <s0:ReturnCode>Success</s0:ReturnCode>
+                <s0:ReturnMessage>
+                  Item Master Interface Process Completed Successfully
+                </s0:ReturnMessage>
               </s0:responseHeader>
             </s0:receiveItemMasterResponse>
           </soap11env:Body>
