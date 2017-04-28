@@ -1,5 +1,11 @@
+Purpose
+=======
+This tool can be used to accept SOAP messages which are then written to a
+specified path as plain XML data.
+
 TODO
 ====
+
 Required
 --------
 * Implement ``receiveItemMaster``.
@@ -17,7 +23,7 @@ Optional
 .. _native validation: http://spyne.io/docs/2.10/manual/05-02_validation.html#a-native-validation-example
 
 Design
-======
+------
 * Look at ``examples/complex.py``.
 * Why does ``_returns=Array(User)`` create 2 elements?
   ::
@@ -30,5 +36,5 @@ Design
     </xs:complexType>
 
 Testing
-=======
+-------
 * Use ``examples/testing/helloworld_null.py``.
